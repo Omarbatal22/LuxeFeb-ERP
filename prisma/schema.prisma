@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id            String   @id @default(uuid())
+  clientName    String
+  phone         String?
+  address       String?
+  projectType   String   // شقة | شركة | فيلا | محل | أخرى
+  initialCost   Float
+  finalCost     Float
+  status        String   @default("جديد") // جديد | قيد_التنفيذ | منتهي | ملغي
+  startDate     DateTime?
+  deliveryDate  DateTime?
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  rooms         Room[]
+  costChanges   CostChange[]
+  expenses      Expense[]
+  payments      Payment[]
+}
+
+model CostChange {
+  id            String   @id @default(uuid())
+  projectId     String
+  oldCost       Float
+  changeAmount  Float
+  reason        String
+  changeDate    DateTime @default(now())
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Room {
+  id            String   @id @default(uuid())
+  projectId     String
+  name          String   // غرفة نوم رئيسية | غرفة أطفال | صالون | مطبخ ...
+  allocatedCost Float
+  description   String?
+  notes         String?
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  expenses      Expense[]
+}
+
+model ExpenseType {
+  id            String   @id @default(uuid())
+  name          String   // خشب زان | مفصلات | نجار | دهان | تنجيد ...
+  category      String   // خامات | عمالة | خدمات_خارجية | نقل | إدارية
+  expenses      Expense[]
+}
+
+model Expense {
+  id            String   @id @default(uuid())
+  projectId     String
+  roomId        String?
+  expenseTypeId String
+  vendorName    String?  // اسم المورد أو الشخص اللي خد الفلوس
+  description   String
+  amount        Float
+  expenseDate   DateTime @default(now())
+  paymentMethod String   @default("كاش") // كاش | تحويل_بنكي | آجل
+  receiptImage  String?
+  notes         String?
+
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  room          Room?    @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  expenseType   ExpenseType @relation(fields: [expenseTypeId], references: [id])
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  projectId     String
+  amount        Float
+  paymentDate   DateTime @default(now())
+  paymentMethod String   @default("كاش") // كاش | تحويل_بنكي | شيك
+  reason        String   @default("دفعة") // عربون | دفعة_مرحلية | دفعة_نهائية
+  notes         String?
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
