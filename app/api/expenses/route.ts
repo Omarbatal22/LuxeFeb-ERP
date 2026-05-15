@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   const expenses = await prisma.expense.findMany({
     orderBy: { expenseDate: "desc" },
     include: {
