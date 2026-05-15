@@ -10,29 +10,29 @@ interface StatCardProps {
 }
 
 const borderMap: Record<string, string> = {
-  blue: "hover:border-primary-300",
-  green: "hover:border-emerald-300",
-  red: "hover:border-rose-300",
-  yellow: "hover:border-amber-300",
-  purple: "hover:border-purple-300",
+  blue: "hover:border-info-300",
+  green: "hover:border-success-300",
+  red: "hover:border-danger-300",
+  yellow: "hover:border-warning-300",
+  purple: "hover:border-brand-300",
   gray: "hover:border-gray-300",
 };
 
 const sideStripMap: Record<string, string> = {
-  blue: "bg-primary-500",
-  green: "bg-emerald-500",
-  red: "bg-rose-500",
-  yellow: "bg-amber-500",
-  purple: "bg-purple-500",
+  blue: "bg-info",
+  green: "bg-success",
+  red: "bg-danger",
+  yellow: "bg-warning",
+  purple: "bg-brand-500",
   gray: "bg-gray-400",
 };
 
 const iconBgMap: Record<string, string> = {
-  blue: "bg-primary-50 text-primary-600",
-  green: "bg-emerald-50 text-emerald-600",
-  red: "bg-rose-50 text-rose-600",
-  yellow: "bg-amber-50 text-amber-600",
-  purple: "bg-purple-50 text-purple-600",
+  blue: "bg-info-light text-info-dark",
+  green: "bg-success-light text-success-dark",
+  red: "bg-danger-light text-danger-dark",
+  yellow: "bg-warning-light text-warning-dark",
+  purple: "bg-brand-50 text-brand-700",
   gray: "bg-gray-50 text-gray-600",
 };
 

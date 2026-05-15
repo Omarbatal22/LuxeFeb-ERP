@@ -22,9 +22,38 @@ const config: Config = {
           900: "#08334f",
           950: "#041d2e",
         },
-        success: "#10b981",
-        danger: "#ef4444",
-        warning: "#f59e0b",
+        brand: {
+          50: "#fdf8f6",
+          100: "#f2e8e5",
+          200: "#eaddd7",
+          300: "#e0c1b3",
+          400: "#d3a28e",
+          500: "#c78369",
+          600: "#b97156",
+          700: "#9b5e47",
+          800: "#7c4c39",
+          900: "#653e2f",
+        },
+        success: {
+          DEFAULT: "#10b981",
+          light: "#ecfdf5",
+          dark: "#065f46",
+        },
+        danger: {
+          DEFAULT: "#ef4444",
+          light: "#fef2f2",
+          dark: "#991b1b",
+        },
+        warning: {
+          DEFAULT: "#f59e0b",
+          light: "#fffbeb",
+          dark: "#92400e",
+        },
+        info: {
+          DEFAULT: "#0284c7",
+          light: "#f0f9ff",
+          dark: "#075985",
+        }
       },
       boxShadow: {
         '2xs': '0 1px 2px 0 rgba(0, 0, 0, 0.03)',

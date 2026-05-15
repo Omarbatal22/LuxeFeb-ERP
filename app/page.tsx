@@ -6,11 +6,8 @@ import { formatCurrency } from "@/lib/utils";
 import { Sparkles, TrendingUp, PieChart as PieIcon, BarChart3, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-const COLORS = ["#0284c7", "#10b981", "#f59e0b", "#e11d48", "#8b5cf6", "#db2777"];
-
-const barTooltipConfig = { backgroundColor: "#0f172a", borderRadius: "12px", border: "none", color: "#fff", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" };
-const pieTooltipConfig = { backgroundColor: "#0f172a", borderRadius: "12px", border: "none", color: "#fff" };
-const BG_CLASSES = ["bg-sky-600", "bg-emerald-500", "bg-amber-500", "bg-rose-600", "bg-violet-500", "bg-pink-600"];
+const COLORS = ["#0284c7", "#10b981", "#ef4444", "#f59e0b", "#c78369", "#64748b"];
+const BG_CLASSES = ["bg-info", "bg-success", "bg-danger", "bg-warning", "bg-brand-500", "bg-primary-500"];
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<any>(null);
@@ -103,10 +100,11 @@ export default function DashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stats.monthlyChart}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="name" tickLine={false} axisLine={{ stroke: "#e2e8f0" }} tick={{ fill: "#64748b", fontSize: 12 }} />
-                  <YAxis tickLine={false} axisLine={{ stroke: "#e2e8f0" }} tick={{ fill: "#64748b", fontSize: 12 }} tickFormatter={(v) => formatCurrency(v).replace("ج.م", "").trim()} />
-                  <Tooltip
-                    contentStyle={barTooltipConfig}
+                  <XAxis dataKey="name" tickLine={false} axisLine={{ stroke: "#e2e8f0" }} tick={{ fill: "#64748b", fontSize: 11 }} />
+                  <YAxis tickLine={false} axisLine={{ stroke: "#e2e8f0" }} tick={{ fill: "#64748b", fontSize: 11 }} tickFormatter={(v) => formatCurrency(v).replace("ج.م", "").trim()} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: "#08334f", borderRadius: "12px", border: "none", color: "#fff" }}
+                    itemStyle={{ color: "#fff" }}
                     formatter={(v: number) => [formatCurrency(v), "الإيرادات"]}
                   />
                   <Bar dataKey="value" fill="url(#primaryGradient)" radius={[8, 8, 0, 0]} maxBarSize={48} />
@@ -159,7 +157,8 @@ export default function DashboardPage() {
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={pieTooltipConfig}
+                    contentStyle={{ backgroundColor: "#08334f", borderRadius: "12px", border: "none", color: "#fff" }}
+                    itemStyle={{ color: "#fff" }}
                     formatter={(v: number) => [formatCurrency(v), "المبلغ"]}
                   />
                 </PieChart>
